@@ -1,0 +1,58 @@
+title: Scene Classification Train
+version: 1.0.0
+description: classify the natural scene through a keras model
+icon: python
+
+author: "cnvrg"
+author_email: "libhub@cnvrg.io"
+
+tags:
+  - training
+command: python3 train.py
+
+requirements:
+  cpu: 3.5
+  memory: 8
+  gpu: 0
+  hpu: 0
+
+image: cnvrg/cnvrg:v5.0
+language: python3
+
+arguments:
+  - key: img_dir
+    type: 'categorical'
+    values:
+       - '/input/s3_connector/scene_data/'
+  - key: epochs
+    type: 'categorical'
+    values:
+       - '50'
+  - key: training_args
+    type: 'categorical'
+    values:
+       - '30,0.15,0.2,0.2,0.15'
+  - key: dimensions
+    type: 'discrete'
+    values:
+       - "123.68,116.779,103.939"
+  - key: target_size
+    type: 'discrete'
+    values:
+       - "224.00,224.00"
+  - key: loss
+    type: 'categorical'
+    values:
+       - 'categorical_crossentropy'
+  - key: metrics
+    type: 'categorical'
+    values:
+       - 'accuracy'
+  - key: lr
+    type: 'discrete'
+    values:
+       - '1e-4'
+  - key: momentum
+    type: 'discrete'
+    values:
+       - '0.9'

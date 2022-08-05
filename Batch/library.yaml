@@ -1,0 +1,68 @@
+title: Scene Classification Batch
+version: 1.0.0
+description: classify the natural scene through a keras model
+icon: python
+
+author: "cnvrg"
+author_email: "info@cnvrg.io"
+
+tags:
+  - training
+
+command: python3 batch_predict.py
+
+requirements:
+  cpu: 2
+  memory: 8
+  gpu: 0
+  hpu: 0
+
+image: cnvrg:v5.0
+
+language: python3
+
+arguments:
+  - key: 'img_dir'
+    type: 'categorical'
+    values:
+      - '/data/scene_567/'
+  - key: 'model_dir'
+    type: 'categorical'
+    values:
+      - '/data/scene_567/my_model_weights.h5'
+  - key: 'using_default'
+    type: 'categorical'
+    values:
+      - 'yes'
+  - key: 'top_pred'
+    type: 'discrete'
+    values:
+      - '5'
+  - key: 'dimensions'
+    type: 'discrete'
+    values:
+      - "123.68,116.779,103.939"
+  - key: 'target_size'
+    type: 'discrete'
+    values:
+      - "224.00,224.00"
+  - key: 'class_names'
+    type: 'categorical'
+    values:
+      - '/data/scene_567/class_names.csv'
+  - key: 'loss'
+    type: 'categorical'
+    values:
+      - 'categorical_crossentropy'
+  - key: 'metrics'
+    type: 'categorical'
+    values:
+      - 'accuracy'
+  - key: 'lr'
+    type: 'discrete'
+    values:
+      - '1e-4'
+  - key: 'momentum'
+    type: 'discrete'
+    values:
+      - '0.9'

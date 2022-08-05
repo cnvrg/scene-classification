@@ -1,0 +1,81 @@
+title: Scene Classify Prediction1
+version: 1.0.0
+description: classifying natural scenery through keras model
+long_description: Scene Classification is the process of classifying the background scenery via a keras model. The Model used here is Vgg16_365 which is a pretrained VGG16 model on Places-365 dataset.
+author: "cnvrg"
+author_email: "libhub@cnvrg.io"
+
+tags:
+  - training
+tasks:
+  - title: predict
+    top: 400
+    left: 100
+
+    # Type must be according to the flow task conventions (data, exec, deploy)
+    type: exec
+
+    # The library data
+    library: scene-classification-batch
+    library_version: 1.0.0
+
+    # The flattened library parameters (in this case we have training library)
+    command: python3 batch_predict.py
+
+    requirements:
+      cpu: 3.5
+      memory: 8
+      gpu: 0
+      hpu: 0
+
+    image: cnvrg:v5.0
+    language: python3
+
+    # The "arguments" property changes to "params", rest remains the same.
+    # Params in the blueprint yaml can be used to override the arguments in the library.
+    params:
+      - key: 'img_dir'
+        type: 'categorical'
+        values:
+          - '/data/scene_567/'
+      - key: 'model_dir'
+        type: 'categorical'
+        values:
+          - '/data/scene_567/my_model_weights.h5'
+      - key: 'using_default'
+        type: 'categorical'
+        values:
+          - 'yes'
+      - key: 'top_pred'
+        type: 'discrete'
+        values:
+          - '5'
+      - key: 'dimensions'
+        type: 'discrete'
+        values:
+          - "123.68,116.779,103.939"
+      - key: 'target_size'
+        type: 'discrete'
+        values:
+          - "224.00,224.00"
+      - key: 'class_names'
+        type: 'categorical'
+        values:
+          - '/data/scene_567/class_names.csv'
+      - key: 'loss'
+        type: 'categorical'
+        values:
+          - 'categorical_crossentropy'
+      - key: 'metrics'
+        type: 'categorical'
+        values:
+          - 'accuracy'
+      - key: 'lr'
+        type: 'discrete'
+        values:
+          - '1e-4'
+      - key: 'momentum'
+        type: 'discrete'
+        values:
+          - '0.9'
+relations: []
