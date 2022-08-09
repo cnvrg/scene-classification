@@ -39,5 +39,4 @@ arguments:
     img: file
   input_schema:
     img: file
-  output_schema:
-    prediction: dict
+  output_schema: {}

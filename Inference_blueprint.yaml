@@ -47,7 +47,6 @@ tasks:
       img: file
     input_schema:
       img: file
-    output_schema:
-      prediction: text
+    output_schema: {}
       
 relations: []

@@ -52,8 +52,8 @@ tasks:
           - 'scene_detection/'
     
   - title: Train
-    top: 400
-    left: 100
+    top: 300
+    left: 250
 
     # Type must be according to the flow task conventions (data, exec, deploy)
     type: exec
@@ -114,8 +114,8 @@ tasks:
         values:
            - '0.9'
   - title: Inference
-    top: 400
-    left: 900
+    top: 300
+    left: 500
 
     # Type must be according to the flow task conventions (data, exec, deploy)
     type: deploy
@@ -145,8 +145,7 @@ tasks:
       img: file
     input_schema:
       img: file
-    output_schema:
-      prediction: dict
+    output_schema: {}
 
 relations:
   - from: S3 Connector

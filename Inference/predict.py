@@ -218,7 +218,7 @@ def VGG16_Places365(include_top=True, weights='places',
 WEIGHTS_PATH_NO_TOP = 'https://libhub-readme.s3.us-west-2.amazonaws.com/model_files/scene_detection/vgg16/vgg16-places365_weights_tf_dim_ordering_tf_kernels_notop.h5'
 WEIGHTS_PATH = 'https://libhub-readme.s3.us-west-2.amazonaws.com/model_files/scene_detection/vgg16/vgg16-places365_weights_tf_dim_ordering_tf_kernels.h5'
 
-model_2 = None
+model_updated = None
 model = None
 
 
@@ -239,10 +239,10 @@ def predict(data):
         img = cv2.imread(savepath)
         image = resize(img, (224, 224))
         image = np.expand_dims(image, 0)
-        if os.path.exists("/input/Train/my_model_weights.h5"):
+        if os.path.exists("/input/train/my_model_weights.h5"):
             # fine-tuning the model
-            model_dir = "/input/Train/my_model_weights.h5"
-            class_names = "/input/Train/class_names.csv"
+            model_dir = "/input/train/my_model_weights.h5"
+            class_names = "/input/train/class_names.csv"
             class_names = pd.read_csv(class_names)
             base_model = VGG16_Places365(
                 weights='places', include_top=False, input_tensor=Input(shape=(t1, t2, 3)))
@@ -255,12 +255,12 @@ def predict(data):
             headModel = Dropout(0.5)(headModel)
             headModel = Dense(
                 class_names.shape[0], activation="softmax")(headModel)
-            model_2 = Model(inputs=base_model.input, outputs=headModel)
+            model_updated = Model(inputs=base_model.input, outputs=headModel)
             opt = SGD(lr=1e-4, momentum=0.9)
-            model_2.compile(loss="categorical_crossentropy",
+            model_updated.compile(loss="categorical_crossentropy",
                             optimizer=opt, metrics=["accuracy"])
-            model_2.load_weights(model_dir)
-            predIdxs = model_2.predict(image)
+            model_updated.load_weights(model_dir)
+            predIdxs = model_updated.predict(image)
             predIdxs = np.argmax(predIdxs, axis=1)
 
             class_names['label'] = range(len(class_names['keys'].unique()))
@@ -301,4 +301,4 @@ def predict(data):
         predicted_response[cnt].append(response)
         cnt = cnt+1
 
-    return {'prediction': predicted_response}
+    return {'prediction' : str(predicted_response)}
