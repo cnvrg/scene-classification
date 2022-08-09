@@ -260,7 +260,7 @@ def predict(data):
             model_updated.compile(loss="categorical_crossentropy",
                             optimizer=opt, metrics=["accuracy"])
             model_updated.load_weights(model_dir)
-            predIdxs = model_updated.predict(image)
+            predIdxs_proba = model_updated.predict(image)
             predIdxs = np.argmax(predIdxs, axis=1)
 
             class_names['label'] = range(len(class_names['keys'].unique()))
@@ -268,7 +268,7 @@ def predict(data):
             response["name"] = str(cnt)+'.' + extension
             response["labels"] = class_names.loc[class_names['label']
                                                  == predIdxs[0]]['keys'].item()
-            response["confidence"] = predIdxs[0]
+            response["confidence"] = predIdxs_proba[0]
             response['model'] = model_dir
         else:
             # original model code
