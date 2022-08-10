@@ -261,14 +261,14 @@ def predict(data):
                             optimizer=opt, metrics=["accuracy"])
             model_updated.load_weights(model_dir)
             predIdxs_proba = model_updated.predict(image)
-            predIdxs = np.argmax(predIdxs, axis=1)
-
+            predIdxs = np.argmax(predIdxs_proba, axis=1)
+            
             class_names['label'] = range(len(class_names['keys'].unique()))
             response = {}
             response["name"] = str(cnt)+'.' + extension
             response["labels"] = class_names.loc[class_names['label']
                                                  == predIdxs[0]]['keys'].item()
-            response["confidence"] = predIdxs_proba[0]
+            response["confidence"] = str(round(predIdxs_proba[0][predIdxs[0]],2))
             response['model'] = model_dir
         else:
             # original model code
@@ -301,4 +301,5 @@ def predict(data):
         predicted_response[cnt].append(response)
         cnt = cnt+1
 
-    return {'prediction' : str(predicted_response)}
+    #return {'prediction' : str(predicted_response)}
+    return str(predicted_response)
