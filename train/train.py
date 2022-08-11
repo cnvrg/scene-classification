@@ -369,24 +369,24 @@ headModel = Flatten(name="flatten")(headModel)
 headModel = Dense(512, activation="relu")(headModel)
 headModel = Dropout(0.5)(headModel)
 headModel = Dense(cnt_classes, activation="softmax")(headModel)
-model_2 = Model(inputs=base_model.input, outputs=headModel)
+model_new = Model(inputs=base_model.input, outputs=headModel)
 
 opt = SGD(lr=lr, momentum=momentum)
-model_2.compile(loss=loss, optimizer=opt, metrics=[metrics])
+model_new.compile(loss=loss, optimizer=opt, metrics=[metrics])
 
-result = model_2.fit(
+result = model_new.fit(
     x=trainGen,
     steps_per_epoch=totalTrain // BATCH_SIZE,
     epochs=epochs)
 
 cnvrg_workdir = os.environ.get("CNVRG_WORKDIR", "/cnvrg")
 ## saving weights and predicting output
-model_2.save_weights(cnvrg_workdir+'/my_model_weights.h5')
+model_new.save_weights(cnvrg_workdir+'/my_model_weights.h5')
 testGen.reset()
 keys1 = pd.DataFrame(columns=['keys', 'label'])
 keys1['keys'] = list(testGen.class_indices.keys())
 keys1.to_csv(cnvrg_workdir+'/class_names.csv', index=False)
-predIdxs = model_2.predict(x=testGen, steps=(totalTest // BATCH_SIZE) + 1)
+predIdxs = model_new.predict(x=testGen, steps=(totalTest // BATCH_SIZE) + 1)
 y_classes = predIdxs.argmax(axis=-1)
 predIdxs = np.argmax(predIdxs, axis=1)
 print(classification_report(testGen.classes, predIdxs, target_names=testGen.class_indices.keys()))

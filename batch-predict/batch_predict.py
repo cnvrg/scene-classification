@@ -322,7 +322,7 @@ if using_default.lower().startswith('y') == True:
         df.at[i, 'Name'] = testGen.filenames[i]
         for j in range(predictions_to_return):
             df.at[i, 'Label_' + str(j)] = cap.loc[cap['label']==np.argsort(preds[i])[::-1][0:predictions_to_return][j]]['category'].item()
-            df.at[i, 'Confidence_' + str(j)] = str(round(preds[i][np.argsort(preds[i])[::-1][0:predictions_to_return][j]],2))
+            df.at[i, 'Confidence_' + str(j)] = round(float(preds[i][np.argsort(preds[i])[::-1][0:predictions_to_return][j]]),4)
 
     df.to_csv(cnvrg_workdir+'/output.csv')
 
@@ -350,14 +350,14 @@ else:
     headModel = Dense(512, activation="relu")(headModel)
     headModel = Dropout(0.5)(headModel)
     headModel = Dense(class_names.shape[0], activation="softmax")(headModel)
-    model_2 = Model(inputs=base_model.input, outputs=headModel)
+    model_new = Model(inputs=base_model.input, outputs=headModel)
     predictions_to_return = top_pred
     df = pd.DataFrame(columns=['Name', 'Label', 'Confidence'])
 
     opt = SGD(lr=lr, momentum=momentum)
-    model_2.compile(loss=loss, optimizer=opt, metrics=[metrics])
-    model_2.load_weights(model_dir)
-    predIdxs = model_2.predict(x=testGen)
+    model_new.compile(loss=loss, optimizer=opt, metrics=[metrics])
+    model_new.load_weights(model_dir)
+    predIdxs = model_new.predict(x=testGen)
     percentage_pred = predIdxs
     predIdxs = np.argmax(predIdxs, axis=1)
     class_names['label'] = range(len(class_names['keys'].unique()))
@@ -366,5 +366,5 @@ else:
 
         df.at[i, 'Name'] = testGen.filenames[i]
         df.at[i, 'Label'] = class_names.loc[class_names['label'] == predIdxs[i]]['keys'].item()
-        df.at[i, 'Confidence'] = str(round(percentage_pred[i][predIdxs[i]],2))
+        df.at[i, 'Confidence'] = round(float(percentage_pred[i][predIdxs[i]]),4)
     df.to_csv(cnvrg_workdir+'/output.csv')

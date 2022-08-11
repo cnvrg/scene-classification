@@ -24,6 +24,7 @@ import base64 as b6
 import cv2
 import magic
 import pathlib
+import requests
 # defining the VGG16 initialization function
 
 FILES = ['category_places.csv']
@@ -266,9 +267,8 @@ def predict(data):
             class_names['label'] = range(len(class_names['keys'].unique()))
             response = {}
             response["name"] = str(cnt)+'.' + extension
-            response["labels"] = class_names.loc[class_names['label']
-                                                 == predIdxs[0]]['keys'].item()
-            response["confidence"] = str(round(predIdxs_proba[0][predIdxs[0]],2))
+            response["labels"] = class_names.loc[class_names['label']== predIdxs[0]]['keys'].item()
+            response["confidence"] = round(float(predIdxs_proba[0][predIdxs[0]]),4)
             response['model'] = model_dir
         else:
             # original model code
@@ -292,14 +292,14 @@ def predict(data):
                     preds)[::-1][0:5][4]]['category'].item()
             ]
             response["confidence"] = [
-                str(round(preds[np.argsort(preds)[::-1][0:5][0]], 2)),
-                str(round(preds[np.argsort(preds)[::-1][0:5][1]], 2)),
-                str(round(preds[np.argsort(preds)[::-1][0:5][2]], 2)),
-                str(round(preds[np.argsort(preds)[::-1][0:5][3]], 2)),
-                str(round(preds[np.argsort(preds)[::-1][0:5][4]], 2))
+                round(float(preds[np.argsort(preds)[::-1][0:5][0]]),4),
+                round(float(preds[np.argsort(preds)[::-1][0:5][1]]),4),
+                round(float(preds[np.argsort(preds)[::-1][0:5][2]]),4),
+                round(float(preds[np.argsort(preds)[::-1][0:5][3]]),4),
+                round(float(preds[np.argsort(preds)[::-1][0:5][4]]),4)
             ]
         predicted_response[cnt].append(response)
         cnt = cnt+1
 
     #return {'prediction' : str(predicted_response)}
-    return str(predicted_response)
+    return predicted_response
