@@ -25,7 +25,7 @@ arguments:
   - key: 'img_dir'
     type: 'categorical'
     values:
-      - '/input/s3_connector/scene_data/'
+      - '/input/s3_connector/test_images/scene_classification/'
   - key: 'model_dir'
     type: 'categorical'
     values:
