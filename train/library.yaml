@@ -23,7 +23,7 @@ arguments:
   - key: img_dir
     type: 'categorical'
     values:
-       - '/input/s3_connector/scene_data/'
+       - '/input/s3_connector/scene_detection/training_images/'
   - key: epochs
     type: 'categorical'
     values:

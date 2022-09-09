@@ -25,11 +25,11 @@ arguments:
   - key: 'img_dir'
     type: 'categorical'
     values:
-      - '/input/s3_connector/test_images/scene_classification/'
+      - '/input/s3_connector/scene_detection/test_images/'
   - key: 'model_dir'
     type: 'categorical'
     values:
-      - '/input/Train/my_model_weights.h5'
+      - '/input/s3_connector/scene_detection/my_model_weights.h5'
   - key: 'using_default'
     type: 'categorical'
     values:

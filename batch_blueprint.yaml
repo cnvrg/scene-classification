@@ -80,7 +80,7 @@ tasks:
       - key: 'img_dir'
         type: 'categorical'
         values:
-          - '/input/s3_connector/test_images/scene_classification/'
+          - '/input/s3_connector/scene_detection/test_images/'
       - key: 'model_dir'
         type: 'categorical'
         values:
