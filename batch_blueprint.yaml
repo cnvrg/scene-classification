@@ -1,4 +1,4 @@
-title: Scene Classification Batch
+title: Batch Predict Scene
 version: 1.0.0
 description: classifying natural scenery through keras model
 long_description: Scene Classification is the process of classifying the background scenery via a keras model. The Model used here is Vgg16_365 which is a pretrained VGG16 model on Places-365 dataset.
