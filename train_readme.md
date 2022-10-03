@@ -1,31 +1,29 @@
-You can use this blueprint to train a custom model on your own set of scene categories. You can either use the pretrained Vgg16 Model for this or the custom trained model (whose weights you can download after running the train blueprint), to get the predictions.
-In order to train this model with your data, you would need to provide a directory with multiple sub-directories, containing the different classes of images all located in s3:
-- img-dir
-    The files in that folder should be organized like this:
-        - Dataset
-            -class1 : category of natural sceneries
-            -class2 : category of natural sceneries
-            -class3 : category of natural sceneries
+Use this blueprint to train a custom model on your own set of natural scene categories. The training and fine-tuning are performed on the pretrained VGG16-365 model (VGG16 model trained on the Places-365 dataset) with the data file the user uploads as a dataset. This blueprint also establishes an endpoint that can be used to classify scenes in images based on the newly trained model.
 
-1. Click on `Use Blueprint` button
-2. You will be redirected to your blueprint flow page
-3. In the flow, edit the following tasks to provide your data:
+Users can use either the pretrained VGG16-365 model or a custom-trained model, the latter’s weights of which can be downloaded after the blueprint run. To train this model with your data, provide in the S3 Connector an ` img-dir` dataset directory with multiple subdirectories containing the different classes of images, organized like the following:
+* -class1 – first category of natural sceneries
+* -class2 – second category of natural sceneries
+* -class3 – third category of natural sceneries
 
-   In the `S3 Connector` task:
-    * Under the `bucketname` parameter provide the bucket name of the data
-    * Under the `prefix` parameter provide the main path to where the images are located
-   In the `Train` task:
-    *  Under the `img_dir` parameter provide the path to the directory including the prefix you provided in the `S3 Connector`, it should look like:
-       `/input/s3_connector/<prefix>/scene_detection`
+Complete the following steps to train the scene-classifier model:
+1. Click the **Use Blueprint** button. The cnvrg Blueprint Flow page displays.
+2. In the flow, click the **S3 Connector** task to display its dialog.
+   * Within the **Parameters** tab, provide the following Key-Value pair information:
+     - Key: `bucketname` - Value: enter the data bucket name
+     - Key: `prefix` - Value: provide the main path to the images folder
+   * Click the **Advanced** tab to change resources to run the blueprint, as required.
+3. Return to the flow and click the **Train** task to display its dialog.
+   * Within the **Parameters** tab, provide the following Key-Value pair information:
+     - Key: `img_dir` – Value: provide the path to the images folder including the S3 prefix
+     - `/input/s3_connector/<prefix>/scene_detection` − ensure the path adheres this format
+   NOTE: You can use prebuilt data examples paths already provided.
+   * Click the **Advanced** tab to change resources to run the blueprint, as required.
+4.	Click the **Run** button. The cnvrg software launches the training blueprint as set of experiments, generating a trained scene-classifier model and deploying it as a new API endpoint.
+5. Track the blueprint's real-time progress in its experiments page, which displays artifacts such as logs, metrics, hyperparameters, and algorithms.
+6. Click the **Serving** tab in the project, locate your endpoint, and complete one or both of the following options:
+   * Use the Try it Live section with any natural scene image to check the model.
+   * Use the bottom integration panel to integrate your API with your code by copying in your code snippet.
 
-**NOTE**: You can use prebuilt data examples paths that are already provided
+A custom model and an API endpoint which can classify an image’s scenes have now been trained and deployed.
 
-4. Click on the 'Run Flow' button
-5. In a few minutes you will train a new scene classification model and deploy as a new API endpoint
-6. Go to the 'Serving' tab in the project and look for your endpoint
-7. You can use the `Try it Live` section with any image containing natural scenery to check your model
-8. You can also integrate your API with your code using the integration panel at the bottom of the page
-
-Congrats! You have trained and deployed a custom model that detects fire elements in images!
-
-[See here how we created this blueprint](https://github.com/cnvrg/scene-classification)
+Click [here](link) for detailed instructions on this blueprint's run. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).

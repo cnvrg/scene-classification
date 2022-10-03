@@ -1,29 +1,23 @@
-You can use this blueprint to recognize the scene in your images. You can either use the pretrained Vgg16 Model for this or the custom trained model (whose weights you can download after running the train blueprint).
+Use this blueprint to classify natural scenes in a batch of images. You can use either the pretrained Vgg16_365 model or a custom-trained model (the latter's weights of which can be downloaded after running the [train blueprint](../scene-classification/train_readme.md)).
 
-In order to train this model with your data, you would need to provide a directory with multiple sub-directories, containing the different classes of images (whose scene you want to predict) all located in s3:
-- img-dir
-    The files in that folder should be organized like this:
-        - Dataset
-            -class1 : category of natural sceneries
-            -class2 : category of natural sceneries
-            -class3 : category of natural sceneries
+To train this model with your data, provide in the S3 Connector an ` img-dir` dataset directory with multiple subdirectories containing the different classes of images, organized like the following:
+* -class1 – first category of natural sceneries
+* -class2 – second category of natural sceneries
+* -class3 – third category of natural sceneries
 
-1. Click on `Use Blueprint` button
-2. You will be redirected to your blueprint flow page
-3. In the flow, edit the following tasks to provide your data:
+Complete the following steps to run the scene-classifier model in batch mode:
+1. Click **Use Blueprint** button. The cnvrg Blueprint Flow page displays.
+2. Click the **S3 Connector** task to display its dialog. Refer to [Train step 2](../scene-classification/train_readme.md) for instructions.
+3. Click the **Batch-Predict** task to display its dialog.
+   - Within the **Parameters** tab, provide the following Key-Value pair information:
+     - Key: `batch_input` − Value: provide the path to the directory including the S3 prefix
+     - `/input/s3_connector/<prefix>/scene_detection` − ensure the path adheres to this format
+     NOTE: You can use prebuilt data example paths provided.
+   - Click the **Advanced** tab to change resources to run the blueprint, as required.
+4. Click the **Run** button. The cnvrg software deploys a scene-classification model that predicts scenes in a batch of images and outputs a CSV file with the information about the scenery.
+5. Go to the Experiments > Artifacts section and locate the output CSV file.
+6. Click the **output.csv** File Name to view the output CSV file.
 
-   In the `S3 Connector` task:
-    * Under the `bucketname` parameter provide the bucket name of the data
-    * Under the `prefix` parameter provide the main path to where the images are located
-   In the `Train` task:
-    *  Under the `img_dir` parameter provide the path to the directory including the prefix you provided in the `S3 Connector`, it should look like:
-       `/input/s3_connector/<prefix>/scene_detection`
+A custom model that classifies natural scenery in images has now been deployed in batch mode.
 
-**NOTE**: You can use prebuilt data examples paths that are already provided
-
-4. Click on the 'Run Flow' button
-5. In a few minutes you will deploy a scene classification model and predict the scene in a batch of images and download the CSV file with the information about the scenery. Go to output artifacts and check for the output csv file. 
-
-Congrats! You have deployed a custom model that classifies natural scenery in images!
-
-[See here how we created this blueprint](https://github.com/cnvrg/scene-classification)
+Click [here](link) for more detailed instructions to run this blueprint. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).
