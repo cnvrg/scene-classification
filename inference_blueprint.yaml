@@ -1,7 +1,7 @@
 title: Scene Classification Inference
 version: 1.0.0
-description: classifying natural scenery through keras model
-long_description: Scene Classification is the process of classifying the background scenery via a keras model. The Model used here is Vgg16_365 which is a pretrained VGG16 model on Places-365 dataset.
+description: Classify natural scenery in images using a pretrained VGG16_365 model and a custom dataset
+long_description: Classify natural scenery in images using a pretrained VGG16_365 model (a VGG16 model trained on the Places-365 dataset) and a custom dataset.
 author: "cnvrg"
 author_email: "libhub@cnvrg.io"
 
