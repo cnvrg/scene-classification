@@ -6,7 +6,7 @@ To train this model with your data, provide in the S3 Connector an ` img-dir` da
 * -class3 – third category of natural sceneries
 
 Complete the following steps to run the scene-classifier model in batch mode:
-1. Click **Use Blueprint** button. The cnvrg Blueprint Flow page displays.
+1. Click the **Use Blueprint** button. The cnvrg Blueprint Flow page displays.
 2. Click the **S3 Connector** task to display its dialog. Refer to [Train step 2](../scene-classification/train_readme.md) for instructions.
 3. Click the **Batch-Predict** task to display its dialog.
    - Within the **Parameters** tab, provide the following Key-Value pair information:
