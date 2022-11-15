@@ -9,6 +9,4 @@ Complete the following steps to deploy this scene-classifier endpoint:
    - Use the Try it Live section with any natural scene image to check the model.
    - Use the bottom integration panel to integrate your API with your code by copying in your code snippet.
 
-An API endpoint that classifies natural scenes in images has now been deployed.
-
-Click [here](link) for detailed instructions to run this blueprint. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).
+An API endpoint that classifies natural scenes in images has now been deployed. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).
