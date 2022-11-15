@@ -18,6 +18,4 @@ Complete the following steps to run the scene-classifier model in batch mode:
 5. Go to the Experiments > Artifacts section and locate the output CSV file.
 6. Click the **output.csv** File Name to view the output CSV file.
 
-A custom model that classifies natural scenery in images has now been deployed in batch mode.
-
-Click [here](link) for more detailed instructions to run this blueprint. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).
+A custom model that classifies natural scenery in images has now been deployed in batch mode. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).
