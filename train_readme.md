@@ -24,6 +24,4 @@ Complete the following steps to train the scene-classifier model:
    * Use the Try it Live section with any natural scene image to check the model.
    * Use the bottom integration panel to integrate your API with your code by copying in your code snippet.
 
-A custom model and an API endpoint which can classify an image’s scenes have now been trained and deployed.
-
-Click [here](link) for detailed instructions on this blueprint's run. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).
+A custom model and an API endpoint which can classify an image’s scenes have now been trained and deployed. To learn how this blueprint was created, click [here](https://github.com/cnvrg/scene-classification).
