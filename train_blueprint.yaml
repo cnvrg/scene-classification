@@ -1,7 +1,7 @@
 title: Scene Classification Training
 version: 1.0.0
-description: fine-tuning keras model using custom data for scene prediction
-long_description: Scene Classification is classifying the background scenery via a keras model. The Model used here is Vgg16_365 which is a pretrained VGG16 model on Places-365 dataset. Custom training is done for different categories or getting better accuracy.
+description: Tailor-train a pretrained VGG16_365 model with your custom data that can classify an image’s background scenery
+long_description: Tailor-train a pretrained VGG16_365 model (the VGG16 model trained on the Places-365 dataset) with your custom data, and deploy an endpoint, which can classify an image’s background scenery to one of predefined natural scene categories.
 author: "cnvrg"
 author_email: "libhub@cnvrg.io"
 
